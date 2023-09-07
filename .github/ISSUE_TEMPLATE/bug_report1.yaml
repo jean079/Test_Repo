@@ -1,9 +1,8 @@
 name: fix Report
 description: File a fix report
 title: "[fix]: "
-labels: ["fix"]
-assignees:
-  - jean079
+labels: ["bug"]
+assignees: [assignee]
 body:
   - type: markdown
     attributes:
