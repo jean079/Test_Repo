@@ -1,10 +1,9 @@
-name: fix Report
-description: File a fix report
-title: "[fix]: "
-labels: ["fix", "triage"]
-projects: ["octo-org/1", "octo-org/44"]
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug"]
 assignees:
-  - octocat
+  - jean079
 body:
   - type: markdown
     attributes:
@@ -18,6 +17,15 @@ body:
       placeholder: ex. email@example.com
     validations:
       required: false
+  - type: dropdown
+    id: assignee
+    attributes:
+      label: Assignee
+      description: Who should be assigned to this issue?
+      options:
+        - jean079
+        - johndoe
+        - janedoe
   - type: textarea
     id: what-happened
     attributes:
