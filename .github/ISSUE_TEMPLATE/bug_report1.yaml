@@ -1,7 +1,7 @@
 name: Bug Report
-description: File a bug report
-title: "[Bug]: "
-labels: ["bug"]
+description: File a fix report
+title: "[fix]: "
+labels: ["fix"]
 assignees:
   - jean079
 body:
