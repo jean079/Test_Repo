@@ -3,8 +3,6 @@ description: File a bug report
 title: "[fix]: "
 labels: ["fix"]
 projects: ["/projects/1/views/1"]
-assignees:
-  - jean079
 body:
   - type: markdown
     attributes:
