@@ -20,11 +20,11 @@ body:
       label: Extra information
       description: If applicable provide screenshots or other necessary information.
       placeholder: Enter Extra information (optional).
-   - type: input
-    id: rom
+    - type: input
+    id: contact
     attributes:
-      label: Rom
-      description: please add the amount of hours that this feature is going to take.
-      placeholder: abc
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
     validations:
       required: false
