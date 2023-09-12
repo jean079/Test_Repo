@@ -29,6 +29,5 @@ body:
         - Critical
         - Important
         - Not Urgent
-      default: 0
     validations:
       required: true
