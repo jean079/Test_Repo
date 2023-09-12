@@ -1,10 +1,6 @@
 name: Problem Report
 description: Report an issue or problem
-title: "[Issue]: "
-labels: ["issue", "triage"]
-projects: ["octo-org/1", "octo-org/44"]
-assignees:
-  - octocat
+labels: ["Bug"]
 body:
   - type: markdown
     attributes:
@@ -22,7 +18,7 @@ body:
     id: info
     attributes:
       label: Extra information
-      description: If applicable provide screenshot or username email address.
+      description: If applicable provide screenshot, username or email address.
       placeholder: Enter Extra information (optional).
   - type: dropdown
     id: urgency
