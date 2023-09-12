@@ -20,6 +20,8 @@ body:
       label: Extra information
       description: If applicable provide screenshots or other necessary information.
       placeholder: Enter Extra information (optional).
+    validations:
+      required: true
   - type: input
   id: contact
   attributes:
