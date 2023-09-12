@@ -13,7 +13,7 @@ body:
   - type: textarea
     id: problem-statement
     attributes:
-      title: Problem Statement
+      label: Problem Statement
       description: Please describe the problem or issue you encountered.
       placeholder: Describe the problem in detail.
     validations:
