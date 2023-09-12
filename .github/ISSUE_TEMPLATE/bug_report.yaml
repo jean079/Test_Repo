@@ -19,11 +19,11 @@ body:
     validations:
       required: true
   - type: textarea
-    id: userinfo
+    id: info
     attributes:
-      label: User Information
-      description: If you'd like to provide your contact information (e.g., name, email address), you can do so here.
-      placeholder: Enter your contact information (optional).
+      label: Extra information
+      description: If applicable provide screenshot or username email address.
+      placeholder: Enter Extra information (optional).
   - type: dropdown
     id: urgency
     attributes:
