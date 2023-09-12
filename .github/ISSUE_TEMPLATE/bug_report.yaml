@@ -1,5 +1,5 @@
-name: Problem Report
-description: Report an issue or problem
+name: Bug Report
+description: Report a bug or problem
 labels: ["Bug"]
 body:
   - type: markdown
