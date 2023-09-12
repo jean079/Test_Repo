@@ -20,14 +20,11 @@ body:
       label: Extra information
       description: If applicable provide screenshots or other necessary information.
       placeholder: Enter Extra information (optional).
-  - type: dropdown
-    id: urgency
+   - type: input
+    id: rom
     attributes:
-      label: Urgency
-      description: How urgent is the problem?
-      options:
-        - Critical
-        - Important
-        - Not Urgent
+      label: Rom
+      description: please add the amount of hours that this feature is going to take.
+      placeholder: 0
     validations:
-      required: true
+      required: false
