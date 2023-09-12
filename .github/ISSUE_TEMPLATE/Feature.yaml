@@ -27,6 +27,6 @@ body:
     attributes:
       label: Rom
       description: please add the amount of hours that this feature is going to take.
-      placeholder: 
+      placeholder: Amount of hours
     validations:
-      required: false
+      required: true
