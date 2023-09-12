@@ -29,5 +29,6 @@ body:
         - Critical
         - Important
         - Not Urgent
+         placeholder: select urgency
     validations:
       required: true
