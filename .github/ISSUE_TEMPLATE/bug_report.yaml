@@ -19,7 +19,7 @@ body:
     validations:
       required: true
   - type: textarea
-    id: user-info
+    id: userinfo
     attributes:
       label: User Information
       description: If you'd like to provide your contact information (e.g., name, email address), you can do so here.
