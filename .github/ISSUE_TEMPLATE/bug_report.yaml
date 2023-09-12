@@ -1,44 +1,38 @@
-name: fix
-description: File a bug report
-title: "[fix]: "
-labels: ["fix"]
-projects: ["/projects/1/views/1"]
+name: Problem Report
+description: Report an issue or problem
+title: "[Issue]: "
+labels: ["issue", "triage"]
+projects: ["octo-org/1", "octo-org/44"]
+assignees:
+  - octocat
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report!
-  - type: dropdown
-    id: assignee
-    attributes:
-      label: Assignee
-      description: Who should be assigned to this issue?
-      options:
-        - jean079
+        Thank you for taking the time to report this issue!
   - type: textarea
-    id: whatHappened
+    id: problem-statement
     attributes:
-      label: What happened?
-      description: Also tell us, what did you expect to happen?
-      placeholder: Tell us what you see!
-      value: "A bug happened!"
+      label: Problem Statement
+      description: Please describe the problem or issue you encountered.
+      placeholder: Describe the problem in detail.
     validations:
       required: true
-  - type: dropdown
-    id: Importance
+  - type: textarea
+    id: user-info
     attributes:
-      label: Importance
-      description: How critical is the issue?
+      label: User Information
+      description: If you'd like to provide your contact information (e.g., name, email address), you can do so here.
+      placeholder: Enter your contact information (optional).
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: Urgency
+      description: How urgent is the problem?
       options:
-        - critical
-        - important
-        - normal
+        - Critical
+        - Important
+        - Not Urgent
       default: 0
     validations:
       required: true
-  - type: textarea
-    id: User info
-    attributes:
-      label: User info
-      description: provide user info if applicable
-      render: shell
