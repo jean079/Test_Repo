@@ -1,5 +1,5 @@
-name: maintenance Report
-description: Report a maintenance that needs to be done on the project
+name: Maintenance Report
+description: Report a maintenance that needs to be done on the project.
 labels: ["maintenance"]
 body:
   - type: markdown
