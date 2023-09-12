@@ -5,20 +5,20 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thank you for taking the time to report this issue!
+        Thank you for taking the time to this feature!
   - type: textarea
-    id: problem-statement
+    id: feature-statement
     attributes:
-      label: Problem Statement
-      description: Please describe the problem or issue you encountered.
-      placeholder: Describe the problem in detail.
+      label: feature Description
+      description: Please describe the feature.
+      placeholder: Describe the feature in detail.
     validations:
       required: true
   - type: textarea
     id: info
     attributes:
       label: Extra information
-      description: If applicable provide screenshot, username or email address.
+      description: If applicable provide screenshots or other necessary information.
       placeholder: Enter Extra information (optional).
   - type: dropdown
     id: urgency
