@@ -1,0 +1,32 @@
+name: Feature
+description: Add a Feature to the project
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to add this feature!
+  - type: textarea
+    id: feature-statement
+    attributes:
+      label: Feature Description
+      description: Please describe the feature.
+      placeholder: Describe the feature in detail.
+    validations:
+      required: true
+  - type: textarea
+    id: info
+    attributes:
+      label: Extra information
+      description: If applicable provide screenshots or other necessary information.
+      placeholder: Enter Extra information (optional).
+    validations:
+      required: false
+  - type: input
+    id: rom
+    attributes:
+      label: Rom
+      description: please add the amount of hours that this feature is going to take.
+      placeholder: Amount of hours
+    validations:
+      required: true

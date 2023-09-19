@@ -1,0 +1,33 @@
+name: Bug Report
+description: Report a bug or problem
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report this issue!
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: Problem Statement
+      description: Please describe the problem or issue you encountered.
+      placeholder: Describe the problem in detail.
+    validations:
+      required: true
+  - type: textarea
+    id: info
+    attributes:
+      label: Extra information
+      description: If applicable provide screenshot, username or email address.
+      placeholder: Enter Extra information (optional).
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: Urgency
+      description: How urgent is the problem?
+      options:
+        - Critical
+        - Important
+        - Not Urgent
+    validations:
+      required: true
