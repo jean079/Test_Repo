@@ -1,0 +1,28 @@
+name: Production Deployment
+
+on:
+  pull_request:
+    branches:
+      - production
+    types:
+      - closed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Deploy to production
+        run: |
+          # Add your deployment script or commands here
+          # For testing purposes, you can echo a message
+          echo "Deploying to production..."
+
+      - name: Notify completion
+        run: |
+          # Add any notification or cleanup commands here
+          echo "Deployment to production completed."
+
