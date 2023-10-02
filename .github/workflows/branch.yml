@@ -10,15 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check if comment triggers branch creation
+      - name: Check if comment contains the keyword
         id: comment-trigger
-        run: echo "::set-output name=trigger::false"
-        
-      - name: Extract comment body
-        id: extract-comment
         run: |
           COMMENT_BODY=$(jq -r .comment.body $GITHUB_EVENT_PATH)
-          if [[ $COMMENT_BODY == "/create-branch" ]]; then
+          if [[ "$COMMENT_BODY" == *'create branch'* ]]; then
             echo "::set-output name=trigger::true"
           fi
 
@@ -45,5 +41,11 @@ jobs:
           BRANCH_URL="https://github.com/${GITHUB_REPOSITORY}/tree/${BRANCH_NAME}"
           COMMENT_BODY="Branch [$BRANCH_NAME](${BRANCH_URL}) has been created for this issue."
           echo "$COMMENT_BODY" | gh issue comment $ISSUE_NUMBER --body -
+
+      - name: Fetch from origin and checkout branch
+        if: steps.comment-trigger.outputs.trigger == 'true'
+        run: |
+          git fetch origin
+          git checkout $BRANCH_NAME
 
       # You can add more steps as needed for your workflow
