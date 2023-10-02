@@ -1,0 +1,49 @@
+name: Create Branch and Link to Issue
+
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  create-branch-and-link:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if comment triggers branch creation
+        id: comment-trigger
+        run: echo "::set-output name=trigger::false"
+        
+      - name: Extract comment body
+        id: extract-comment
+        run: |
+          COMMENT_BODY=$(jq -r .comment.body $GITHUB_EVENT_PATH)
+          if [[ $COMMENT_BODY == "/create-branch" ]]; then
+            echo "::set-output name=trigger::true"
+          fi
+
+      - name: Checkout code
+        if: steps.comment-trigger.outputs.trigger == 'true'
+        uses: actions/checkout@v2
+
+      - name: Create branch
+        if: steps.comment-trigger.outputs.trigger == 'true'
+        run: |
+          # Extract the issue title
+          ISSUE_TITLE=$(jq -r .issue.title $GITHUB_EVENT_PATH)
+          # Replace spaces with dashes and add your prefix
+          BRANCH_NAME="feature/$(echo $ISSUE_TITLE | tr ' ' '-')"
+          git checkout -b $BRANCH_NAME
+          git push origin $BRANCH_NAME
+
+      - name: Link branch to issue
+        if: steps.comment-trigger.outputs.trigger == 'true'
+        run: |
+          # Extract the issue number
+          ISSUE_NUMBER=$(jq -r .issue.number $GITHUB_EVENT_PATH)
+          # Add a comment to the issue with a reference to the branch
+          BRANCH_URL="https://github.com/${GITHUB_REPOSITORY}/tree/${BRANCH_NAME}"
+          COMMENT_BODY="Branch [$BRANCH_NAME](${BRANCH_URL}) has been created for this issue."
+          echo "$COMMENT_BODY" | gh issue comment $ISSUE_NUMBER --body -
+
+      # You can add more steps as needed for your workflow
