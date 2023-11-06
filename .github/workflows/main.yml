@@ -30,8 +30,5 @@ jobs:
         SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
         TO_EMAIL: ${{ secrets.TO_EMAIL }}
       run: |
-        echo -e "Subject: PR Description\n" > email.txt
-        cat pr_description.txt >> email.txt
-        echo "" >> email.txt
-        echo "Sent from GitHub Actions." >> email.txt
-        ssmtp $TO_EMAIL < email.txt
+        echo "Subject: PR Description" | cat - pr_description.txt | ssmtp -v $TO_EMAIL
+        
