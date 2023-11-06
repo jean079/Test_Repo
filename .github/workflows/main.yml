@@ -17,11 +17,6 @@ jobs:
       run: |
         echo "PR Description: ${{ github.event.pull_request.body }}" >> pr_description.txt
 
-    - name: Install ssmtp
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y ssmtp
-
     - name: Send Email
       env:
         SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
@@ -30,5 +25,14 @@ jobs:
         SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
         TO_EMAIL: ${{ secrets.TO_EMAIL }}
       run: |
-        echo "Subject: PR Description" | cat - pr_description.txt | ssmtp -v $TO_EMAIL
-        
+        cat pr_description.txt | mailx -v \
+          -r $SMTP_USERNAME \
+          -s "PR Description" \
+          -S smtp="$SMTP_SERVER:$SMTP_PORT" \
+          -S smtp-use-starttls \
+          -S smtp-auth=login \
+          -S smtp-auth-user="$SMTP_USERNAME" \
+          -S smtp-auth-password="$SMTP_PASSWORD" \
+          -S ssl-verify=ignore \
+          $TO_EMAIL
+       
