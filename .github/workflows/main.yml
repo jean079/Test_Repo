@@ -17,6 +17,11 @@ jobs:
       run: |
         echo "PR Description: ${{ github.event.pull_request.body }}" >> pr_description.txt
 
+    - name: Install ssmtp
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ssmtp
+
     - name: Send Email
       env:
         SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
@@ -25,6 +30,8 @@ jobs:
         SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
         TO_EMAIL: ${{ secrets.TO_EMAIL }}
       run: |
-        echo "Subject: PR Description" > email.txt
+        echo -e "Subject: PR Description\n" > email.txt
         cat pr_description.txt >> email.txt
-        sendmail -t < email.txt
+        echo "" >> email.txt
+        echo "Sent from GitHub Actions." >> email.txt
+        ssmtp $TO_EMAIL < email.txt
