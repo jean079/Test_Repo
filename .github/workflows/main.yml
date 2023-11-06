@@ -1,28 +1,29 @@
-name: Production Deployment
+name: Send PR Description
 
 on:
   pull_request:
     branches:
-      - production
-    types:
-      - closed
+      - main
 
 jobs:
-  deploy:
+  send_email:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Deploy to production
-        run: |
-          # Add your deployment script or commands here
-          # For testing purposes, you can echo a message
-          echo "Deploying to production..."
+    - name: Extract PR Description
+      run: echo "PR Description: ${{ github.event.pull_request.body }}" >> pr_description.txt
 
-      - name: Notify completion
-        run: |
-          # Add any notification or cleanup commands here
-          echo "Deployment to production completed."
-
+    - name: Send Email
+      env:
+        SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+        SMTP_PORT: ${{ secrets.SMTP_PORT }}
+        SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+        SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        TO_EMAIL: ${{ secrets.TO_EMAIL }}
+      run: |
+        echo "Subject: PR Description" > email.txt
+        cat pr_description.txt >> email.txt
+        sendmail -t < email.txt
