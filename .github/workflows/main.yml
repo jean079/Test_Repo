@@ -26,10 +26,8 @@ jobs:
         TO_EMAIL: ${{ secrets.TO_EMAIL }}
       run: |
         echo "Sending email..."
-        # Replace the following with your email sending code or script.
-        # You can use a tool like 'sendmail' or 'mailx' to send an email with the PR description.
-        # Example (replace with your own email command):
-        echo "PR Description: ${{ github.event.pull_request.body }}" | mail -s "Pull Request Description" $TO_EMAIL
+        echo "PR Description: ${{ github.event.pull_request.body }}" > email_content.txt
+        cat email_content.txt | mail -s "Pull Request Description" $TO_EMAIL
 
-        # Optionally, you can remove the pr_description.txt file after sending the email.
-        # rm pr_description.txt
+        # Optionally, you can remove the pr_description.txt and email_content.txt files after sending the email.
+        rm pr_description.txt email_content.txt
