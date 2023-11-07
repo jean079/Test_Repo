@@ -26,5 +26,5 @@ jobs:
         password: ${{ secrets.SMTP_PASSWORD }}
         to: ${{ secrets.TO_EMAIL }}
         subject: "PR Description"
-        body: |
+        body: 
           $(cat pr_description.txt)
