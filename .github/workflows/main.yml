@@ -25,9 +25,14 @@ jobs:
         SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
         TO_EMAIL: ${{ secrets.TO_EMAIL }}
       run: |
-        echo "Sending email..."
-        echo "PR Description: ${{ github.event.pull_request.body }}" > email_content.txt
-        cat email_content.txt | mail -s "Pull Request Description" $TO_EMAIL
-
-        # Optionally, you can remove the pr_description.txt and email_content.txt files after sending the email.
-        rm pr_description.txt email_content.txt
+        cat pr_description.txt | mailx -v \
+          -r $SMTP_USERNAME \
+          -s "PR Description" \
+          -S smtp="$SMTP_SERVER:$SMTP_PORT" \
+          -S smtp-use-starttls \
+          -S smtp-auth=login \
+          -S smtp-auth-user="$SMTP_USERNAME" \
+          -S smtp-auth-password="$SMTP_PASSWORD" \
+          -S ssl-verify=ignore \
+          $TO_EMAIL
+       
