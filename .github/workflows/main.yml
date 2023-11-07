@@ -17,14 +17,65 @@ jobs:
       run: |
         echo "PR Description: ${{ github.event.pull_request.body }}" >> pr_description.txt
 
-    - name: Send Email
-      uses: softprops/action-email@v3
+
+    - name: Send mail
+      uses: dawidd6/action-send-mail@v3
       with:
-        server: ${{ secrets.SMTP_SERVER }}
-        port: ${{ secrets.SMTP_PORT }}
+        # Specify connection via URL (replaces server_address, server_port, secure,
+        # username and password)
+        #
+        # Format:
+        #
+        #  * smtp://user:password@server:port
+        #  * smtp+starttls://user:password@server:port
+        server_address: ${{ secrets.SMTP_SERVER }}
+        # Server port, default 25:
+        server_port: ${{ secrets.SMTP_PORT }}
+        # Optional whether this connection use TLS (default is true if server_port is 465)
+        secure: true
+        # Optional (recommended) mail server username:
         username: ${{ secrets.SMTP_USERNAME }}
+        # Optional (recommended) mail server password:
         password: ${{ secrets.SMTP_PASSWORD }}
-        to: ${{ secrets.TO_EMAIL }}
-        subject: "PR Description"
-        body: 
-          $(cat pr_description.txt)
+        # Required mail subject:
+        subject: Github Actions job result
+        # Required recipients' addresses:
+        to:  ${{ secrets.TO_EMAIL }}
+        # Required sender full name (address can be skipped):
+        from: Luke Skywalker # <user@example.com>
+        # Optional plain body:
+        body: Build job successfully!
+        # Optional HTML body read from file:
+        html_body: file://README.html
+        # Optional carbon copy recipients:
+        cc: kyloren@example.com,leia@example.com
+        # Optional blind carbon copy recipients:
+        bcc: r2d2@example.com,hansolo@example.com
+        # Optional recipient of the email response:
+        reply_to: luke@example.com
+        # Optional Message ID this message is replying to:
+        in_reply_to: <random-luke@example.com>
+        # Optional unsigned/invalid certificates allowance:
+        ignore_cert: true
+        # Optional converting Markdown to HTML (set content_type to text/html too):
+        convert_markdown: true
+        # Optional attachments:
+        attachments: attachments.zip,git.diff,./dist/static/*.js
+        # Optional priority: 'high', 'normal' (default) or 'low'
+        priority: low   
+        
+        
+
+
+
+    # - name: Send Email
+    #   uses: softprops/action-email@v3
+    #   with:
+    #     server: ${{ secrets.SMTP_SERVER }}
+    #     port: ${{ secrets.SMTP_PORT }}
+    #     username: ${{ secrets.SMTP_USERNAME }}
+    #     password: ${{ secrets.SMTP_PASSWORD }}
+    #     to: ${{ secrets.TO_EMAIL }}
+    #     subject: "PR Description"
+    #     body: |
+    #       $(cat pr_description.txt)
