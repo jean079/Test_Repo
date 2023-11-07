@@ -17,14 +17,28 @@ jobs:
       run: |
         echo "PR Description: ${{ github.event.pull_request.body }}" >> pr_description.txt
 
-    - name: Send Email
-      env:
-        SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
-        SMTP_PORT: ${{ secrets.SMTP_PORT }}
-        SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
-        SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-        TO_EMAIL: ${{ secrets.TO_EMAIL }}
-      run: |
-        echo "Subject: PR Description" > email.txt
-        cat pr_description.txt >> email.txt
-        sendmail -t < email.txt
+    - name: Send some mail
+      uses: wadeww/send-email-action@master
+      with:
+        server_address:  ${{ secrets.SMTP_SERVER }}
+        port: ${{ secrets.SMTP_PORT }}
+        username: ${{ secrets.SMTP_USERNAME }}
+        password: ${{ secrets.SMTP_PASSWORD }}
+        subject: Workflow finished
+        body: Job completed
+        to: vissie574@gmail.com
+        from: Me
+
+
+
+         # - name: Send Email
+    #   uses: softprops/action-email@v3
+    #   with:
+    #     server: ${{ secrets.SMTP_SERVER }}
+    #     port: ${{ secrets.SMTP_PORT }}
+    #     username: ${{ secrets.SMTP_USERNAME }}
+    #     password: ${{ secrets.SMTP_PASSWORD }}
+    #     to: ${{ secrets.TO_EMAIL }}
+    #     subject: "PR Description"
+    #     body: |
+    #       $(cat pr_description.txt)
