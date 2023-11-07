@@ -18,21 +18,13 @@ jobs:
         echo "PR Description: ${{ github.event.pull_request.body }}" >> pr_description.txt
 
     - name: Send Email
-      env:
-        SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
-        SMTP_PORT: ${{ secrets.SMTP_PORT }}
-        SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
-        SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-        TO_EMAIL: ${{ secrets.TO_EMAIL }}
-      run: |
-        cat pr_description.txt | mailx -v \
-          -r $SMTP_USERNAME \
-          -s "PR Description" \
-          -S smtp="$SMTP_SERVER:$SMTP_PORT" \
-          -S smtp-use-starttls \
-          -S smtp-auth=login \
-          -S smtp-auth-user="$SMTP_USERNAME" \
-          -S smtp-auth-password="$SMTP_PASSWORD" \
-          -S ssl-verify=ignore \
-          $TO_EMAIL
-       
+      uses: softprops/action-email@v3
+      with:
+        server: ${{ secrets.SMTP_SERVER }}
+        port: ${{ secrets.SMTP_PORT }}
+        username: ${{ secrets.SMTP_USERNAME }}
+        password: ${{ secrets.SMTP_PASSWORD }}
+        to: ${{ secrets.TO_EMAIL }}
+        subject: "PR Description"
+        body: |
+          $(cat pr_description.txt)
