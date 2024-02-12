@@ -3,9 +3,9 @@ name: Test Tag Trigger
 on:
   push:
     tags:
-      - 'v*'  # Match any tags starting with 'v' (e.g., v1.0.0)
+    - 'v*'  # Match any tags starting with 'v' (e.g., v1.0.0)
     branches:
-        - main
+    - main
 
 jobs:
   test-tag:
