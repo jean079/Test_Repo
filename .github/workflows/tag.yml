@@ -1,0 +1,19 @@
+name: Test Tag Trigger
+
+on:
+  push:
+    tags:
+      - 'v*'  # Match any tags starting with 'v' (e.g., v1.0.0)
+    branches:
+        - main
+
+jobs:
+  test-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Print a message
+      run: echo "This is a test workflow triggered by a tag push."
