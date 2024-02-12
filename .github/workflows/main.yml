@@ -27,4 +27,4 @@ jobs:
       run: |
         echo "Subject: PR Description" > email.txt
         cat pr_description.txt >> email.txt
-        sendmail -t < email.txt
+        sendmail -t < email.tx
