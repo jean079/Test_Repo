@@ -1,20 +1,15 @@
-name: Test Tag Trigger
+name: Your Workflow Name
 
 on:
   push:
     tags:
-    - 'v*'  # Match any tags starting with 'v' (e.g., v1.0.0) test test test
+      - 'v*'  # This will trigger the workflow for any tag pushed
     branches:
-    - main
+      - main
 
 jobs:
-  test-tag:
-    if: github.ref == 'refs/heads/main'
+  your_job_name:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
-
-    - name: Print a message
-      run: echo "This is a test workflow triggered by a tag push."
+      - name: Your Step
+        run: echo "Your job is running"
