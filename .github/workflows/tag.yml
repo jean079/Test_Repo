@@ -9,6 +9,7 @@ on:
 
 jobs:
   your_job_name:
+    if: github.event_name == 'push' && github.ref_type == 'tag' && github.ref == 'refs/tags/v*' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Your Step
